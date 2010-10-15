@@ -19,8 +19,6 @@ $ ipython
 ...   pass
 ... m = Model()
 """
-__authors__ = ["'Andrew D. Yates', <andrew.yates@hhmds.com>"]
-
 
 import os
 import sys
