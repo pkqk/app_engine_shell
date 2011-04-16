@@ -22,13 +22,21 @@ $ ipython
 
 import os
 import sys
-sys.path = sys.path + [
-  '/usr/local/google_appengine',
-  '/usr/local/google_appengine/lib/django',
-  '/usr/local/google_appengine/lib/webob',
-  '/usr/local/google_appengine/lib/yaml/lib',
-  '/usr/local/google_appengine/google/appengine',
-  ]
+
+appengine_dir = "/Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine"
+
+appengine_libs = [
+  appengine_dir,
+  os.path.join(appengine_dir, 'lib', 'antlr3'),
+  os.path.join(appengine_dir, 'lib', 'django_0_96'),
+  os.path.join(appengine_dir, 'lib', 'fancy_urllib'),
+  os.path.join(appengine_dir, 'lib', 'ipaddr'),
+  os.path.join(appengine_dir, 'lib', 'webob'),
+  os.path.join(appengine_dir, 'lib', 'yaml', 'lib'),
+  os.path.join(appengine_dir, 'lib', 'simplejson'),
+  os.path.join(appengine_dir, 'lib', 'graphy'),
+]
+sys.path.extend(appengine_libs)
  
 from google.appengine.api import apiproxy_stub_map
 from google.appengine.api import datastore_file_stub
@@ -51,7 +59,7 @@ apiproxy_stub_map.apiproxy = apiproxy_stub_map.APIProxyStubMap()
  
 # null datastore; datastore changes will not be saved to disk
 stub = datastore_file_stub.DatastoreFileStub(
-  APPLICATION_ID, '/dev/null', '/dev/null')
+  APPLICATION_ID, 'datastore.dump', None)
 apiproxy_stub_map.apiproxy.RegisterStub(
   'datastore_v3', stub)
 
